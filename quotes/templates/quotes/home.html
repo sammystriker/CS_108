@@ -1,0 +1,16 @@
+<!-- templates/home.html -->
+<html>
+<h1>Showing all Quotes</h1>
+
+<!-- scriptlist code to display the calue of the variable 'all_quotes_list'
+{{ all_quotes_list }} -->
+
+<ul>
+    {% for quote in all_quotes_list %}
+    <li>"{{quote.text}}" - {{quote.author}} <br>
+        <img src="{{quote.image_url}}" style="max-width: 400">
+    </li>
+    {% endfor %}
+</ul>
+
+</html>
