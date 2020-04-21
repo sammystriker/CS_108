@@ -12,4 +12,4 @@ class Quote(models.Model):
 
     def __repr__(self):
         '''Returns a string representation of this object.'''
-        return '"%s" -%s' % (self.text, self.author)
+        return '"%s" -%s' %(self.text, self.author)
