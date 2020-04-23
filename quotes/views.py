@@ -1,7 +1,8 @@
 from django.shortcuts import render
 
+
 # Create your views here.
-from .models import Quote
+from .models import Quote, Person
 from django.views.generic import ListView, DetailView
 import random
 
@@ -37,3 +38,11 @@ class RandomPageView(DetailView):
         r = random.randint(0, len(all_quotes) -1)
         q = all_quotes[r]
         return q # return this object
+
+
+class PersonPageView(DetailView):
+    '''Show all quotes and all images for one person.'''
+
+    model = Person
+    template_name = 'quotes/person.html'
+    context_object_name = 'person'

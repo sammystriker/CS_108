@@ -1,0 +1,16 @@
+<!-- templates/person.html -->
+<h1>All Quotes by {{person.name}}</h1>
+
+<ul>
+    {% for quote in person.get_all_quotes %}
+    <li>{{quote.text}}</li>
+    {% endfor %}
+</ul>
+
+<h2>All images of {{person.name}}</h2>
+
+<ul>
+    {% for images in person.get_all_images %}
+    <li><img src='{{images}}' style='width: 200;'></li>
+    {% endfor %}
+</ul>
