@@ -1,5 +1,11 @@
 <!-- templates/home.html -->
 <html>
+
+{% extends 'quotes/base.html' %}
+
+{% block content %}
+
+
 <h1>Showing all Quotes</h1>
 
 <!-- scriptlist code to display the calue of the variable 'all_quotes_list'
@@ -13,4 +19,5 @@
     {% endfor %}
 </ul>
 
+{% endblock %}
 </html>

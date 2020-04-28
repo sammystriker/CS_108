@@ -1,6 +1,10 @@
 <!-- templates/quote.html -->
 <html>
 
+{% extends 'quotes/base.html' %}
+
+{% block content %}
+
 <center>
 <!-- scriptlist code to display the calue of the variable 'all_quotes_list'
 {{ all_quotes_list }} -->
@@ -9,6 +13,12 @@
 <h3>- <a href="{% url 'person' quote.person.pk %}"> {{quote.person}} </a></h3> <br>
 <img src="{{quote.person.get_random_image}}" style="max-width: 400;">
 
+<p>
+    <a href="{% url 'update_quote' quote.pk %}"> Update this Quote</a>
+</p>
+
 </center>
+
+{% endblock %}
 
 </html>

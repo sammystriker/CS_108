@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 import random
 
 # Create your models here.
@@ -49,13 +50,22 @@ class Quote(models.Model):
         '''Returns a string representation of this object.'''
         return '"{{%s" - %s}}' % (self.text, self.person.name)
 
+    def get_absolute_url(self): 
+        '''Return a URL to display this quote object.'''
+        return reverse("quote", kwargs={"pk":self.pk})
+
+
 
 class Image(models.Model):
     '''Represent an image, which is associated with a Person.'''
 
     image_url = models.URLField(blank=True)
+    image_file = models.ImageField(blank=True)
     person = models.ForeignKey('Person', on_delete=models.CASCADE)
 
     def __str__(self):
         '''Return a string representation of this image.'''
-        return self.image_url
+        if self.image_url:
+            return self.image_url
+        else:
+            return self.image_file.url
