@@ -1,0 +1,32 @@
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+
+<style> h2 {text-align: center;} </style>
+<h2>{{profile.firstN}} {{profile.lastN}}</h2>
+
+<img src="{{profile.image_url}}">
+
+<body>
+
+<p>
+{{profile.city}}
+<br>
+{{profile.email}}
+</p>
+
+<table>
+    <tr>
+        <td>Status Messages</td>
+        <td>Time</td>
+    </tr>
+    {% for status in profile.get_status_message %}
+    <tr>
+        <td>{{status}}</td>
+        <td>{{status.get_time}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+{% endblock %}
