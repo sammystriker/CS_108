@@ -1,0 +1,18 @@
+<html>
+
+<h1>Mini Facebook Application</h1>
+
+<table>
+    {% for Profile in all_profiles %}
+    <tr>
+        <td>{{Profile.firstN}}</td>
+        <td>{{Profile.lastN}}</td>
+        <td>{{Profile.city}}</td>
+        <td>{{Profile.email}}</td>
+        <td><img src="{{Profile.image_url}}" height="400px"></td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+</html>
