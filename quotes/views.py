@@ -52,7 +52,7 @@ class PersonPageView(DetailView):
     #context_object_name = 'person'
 
     def get_context_data(self, **kwargs):
-        '''Return a dictionary with context data for thos template ro use.'''
+        '''Return a dictionary with context data for this template to use.'''
 
         #get the default context data:
         #this will include the Person record for this page view
