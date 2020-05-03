@@ -1,9 +1,10 @@
 <html>
-    <style> title {text-align: center;} </style>
+    <style> h1 {text-align: center;} </style>
 
     <h1>Mini Facebook Application</h1>   
 
     <h3><a href="{% url 'home' %}">Home</a> </h3>
+    <h3><a href="{% url 'create_profile' %}">Create a Profile!</a> </h3>
 
         {% block content %}
         {% endblock %}

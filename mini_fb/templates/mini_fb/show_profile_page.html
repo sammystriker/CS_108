@@ -10,10 +10,13 @@
 <body>
 
 <p>
-{{profile.city}}
-<br>
-{{profile.email}}
+    {{profile.city}}
+        <br>
+    {{profile.email}}
+        <br>
+    <a href="{% url 'update_profile' profile.pk %}">Update This Profile</a>
 </p>
+
 
 <table>
     <tr>
@@ -27,6 +30,22 @@
     </tr>
     {% endfor %}
 </table>
+
+<form method="POST" action="{% url 'post_status' profile.pk %}">
+    {% csrf_token %}
+    <table>
+        {% for field in create_status_form %}
+        <tr>
+            <td>{{field}}</td> 
+        {% endfor %}
+            <td>
+                <input type="submit" name= 'Status Update!' value="Add Status!">
+            </td>
+        </tr>
+        
+    </table>
+</form>
+
 
 </body>
 {% endblock %}
