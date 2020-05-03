@@ -20,24 +20,34 @@
 
 <table>
     <tr>
-        <td>Status Messages</td>
-        <td>Time</td>
+        <th>Time</th>
+        <th>Status Messages</th>
     </tr>
     {% for status in profile.get_status_message %}
     <tr>
-        <td>{{status}}</td>
         <td>{{status.get_time}}</td>
+        <td>{{status}}</td>
+
+        {% if status.image %}
+        <td> <img src='{{status.image.url}}' style='max-width: 600;'></td>
+        {% endif %}
+
+        <td><a href="{% url 'delete_status' profile_pk=profile.pk status_pk=status.pk %}">Delete</a></td>
+
     </tr>
     {% endfor %}
 </table>
 
-<form method="POST" action="{% url 'post_status' profile.pk %}">
+<form method="POST" 
+        action="{% url 'post_status' profile.pk %}" 
+        enctype="multipart/form-data">
     {% csrf_token %}
     <table>
-        {% for field in create_status_form %}
         <tr>
-            <td>{{field}}</td> 
-        {% endfor %}
+            <td>New Status: {{create_status_form.message}}</td>
+            <td>Image (optional): {{create_status_form.image}}</td>
+        </tr>
+        <tr>
             <td>
                 <input type="submit" name= 'Status Update!' value="Add Status!">
             </td>

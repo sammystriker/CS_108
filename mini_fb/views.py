@@ -1,8 +1,8 @@
 from django.shortcuts import render
 
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .forms import CreateProfileForm, UpdateProfileForm, CreateStatusMessageForm, StatusMessage
-from .models import Profile
+from .models import Profile, StatusMessage
 from django.shortcuts import redirect
 from django.urls import reverse
 from datetime import datetime
@@ -34,8 +34,6 @@ class ShowProfilePageView(DetailView):
         # return this context dictionary
         return context
 
-    
-
 
 class CreateProfileView(CreateView):
     form_class = CreateProfileForm
@@ -46,8 +44,41 @@ class UpdateProfileView(UpdateView):
     template_name = "mini_fb/update_profile_form.html"
     queryset = Profile.objects.all()
 
+class DeleteStatusMessageView(DeleteView):
+    template_name = "mini_fb/delete_status_form.html"
+    queryset = StatusMessage.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(DeleteStatusMessageView, self).get_context_data(**kwargs)
+        st_msg = StatusMessage.objects.get(pk=self.kwargs['status_pk'])
+
+
+        context['st_msg'] = st_msg
+
+        return context
+
+    def get_object(self):
+         # read the URL data values into variables
+        status_pk = self.kwargs['status_pk']
+        profile_pk = self.kwargs['profile_pk']
+
+        # find the StatusMessage object, and return it
+        deleted_status = StatusMessage.objects.get(pk=status_pk)
+        return deleted_status
+
+    def get_success_url(self):
+        # read the URL data values into variables
+        profile_pk = self.kwargs['profile_pk']
+        status_pk = self.kwargs['status_pk']
+
+        return reverse('show_profile_page', kwargs={'pk': profile_pk})
+
+
+
+
+
 def create_status_message(request, pk):
-    '''
+    '''ç
     Process a form submission to post a new status message.
     '''
     # find the profile that matches the `pk` in the URL
@@ -58,14 +89,16 @@ def create_status_message(request, pk):
 
         # read the data from this form submission
         message = request.POST['message']
+        image = request.POST['image']
 
         # save the new status message object to the database
-        if message:
+        if message or image:
 
             sm = StatusMessage()
             sm.profile = profile
             sm.message = message
             sm.timestamp = datetime.now()
+            sm.image = image
             sm.save()
 
     # redirect the user to the show_profile_page view

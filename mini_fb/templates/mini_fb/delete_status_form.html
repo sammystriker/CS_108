@@ -1,0 +1,38 @@
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+
+<style> h4 {text-align: center;} </style>
+
+<h4> Delete This Status? </h4>
+
+<table>
+    <tr>
+        <td>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="submit" name="Yes" value="Yes">
+            </form>
+        </td>
+        <td>
+            <form method="GET" action="{% url 'show_profile_page' st_msg.profile.pk %}">
+                {% csrf_token %}
+                <input type="submit" name="No" value="No">
+            </form>
+        </td>
+    </tr>
+</table>
+
+<table>
+        <tr>
+            <td>{{st_msg.get_time}}</td>
+            <td>{{st.msg}}</td>
+        
+            {% if st_msg.image %}
+            <td> <img src='{{st_msg.image.url}}' style='max-width: 600;'></td>
+            {% endif %}
+        
+        </tr>
+</table>
+
+{% endblock %}
