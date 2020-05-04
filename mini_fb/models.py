@@ -45,9 +45,6 @@ class Profile(models.Model):
         current_friends = self.get_friends()
         friend_suggestions = Profile.objects.exclude(pk = self.pk)
         fs2 = friend_suggestions.exclude(pk__in=current_friends)
-        #for fr in current_friends:
-        #    fs2 = friend_suggestions.objects.exclude(pk__in=)
-        
 
         return fs2
 
