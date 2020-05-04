@@ -1,0 +1,26 @@
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+
+<h2>Friend suggestions for <a href="{% url 'show_profile_page' profile.pk %}">{{profile}}</a></h2>
+
+<table>
+    {% for friend in profile.get_friend_suggestions %}
+    <tr>
+        <td>
+            <img src='{{friend.image_url}}' width="200px"> 
+        </td>
+        <td>
+            <a href="{% url 'show_profile_page' friend.pk %}"{{friend}}>
+        </td>
+        <td>
+            <form method="POST" action="{% url 'add_friend' profile_pk=profile.pk friend_pk=friend.pk %}" >
+                {% csrf_token %}
+                <input type="submit" name="Add Friend" value="Add Friend"> 
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

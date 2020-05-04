@@ -73,12 +73,36 @@ class DeleteStatusMessageView(DeleteView):
 
         return reverse('show_profile_page', kwargs={'pk': profile_pk})
 
+class ShowNewsFeedView(DeleteView):
+    model = Profile
+    template_name = 'mini_fb/show_news_feed.html'
+    context_object_name = 'profile'
+    queryset = Profile.objects.all()
+
+    def get_object(self):
+        profile_pk = self.kwargs['pk']
+        
+        news = Profile.objects.get(pk=profile_pk)
+        return news
+
+
+class ShowPossibleFriendsView(DetailView):
+    model = Profile
+    template_name = 'mini_fb/show_possible_friends.html'
+
+def add_friend(request, profile_pk, friend_pk):
+    profile = Profile.objects.get(pk= profile_pk)
+    friend = Profile.objects.get(pk= friend_pk)
+
+    profile.friends.add(friend)
+    profile.save()
+    return redirect(reverse('show_profile_page', kwargs={'pk': profile_pk}))
 
 
 
 
 def create_status_message(request, pk):
-    '''ç
+    '''
     Process a form submission to post a new status message.
     '''
     # find the profile that matches the `pk` in the URL
