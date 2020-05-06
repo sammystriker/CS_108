@@ -1,0 +1,14 @@
+{% extends 'music_db/base.html' %}
+
+{% block content %}
+<style> body {text-align: center}> </style>
+
+<body>
+<img style ="text-align: center" src = '{{album.cover.url}}'>
+
+<h2 style ="text-align: center" = >{{album.get_artist_name}}</h2>
+
+</body>
+
+{% endblock %}
+

@@ -1,0 +1,20 @@
+{% extends 'music_db/base.html' %}
+
+{% block content %}
+
+<table>
+    {% for album in all_albums %}
+    <tr>
+        <td>{{album}} <br> {{album.get_artist_name}}</td>
+        <td>{{album.release_date}}</td>
+        <td><img src="{{album.cover.url}}" width="100px"></td>
+        <td>{{album.genre}}</td>
+        {% if album.RIAAcerts != 'None' %}
+        <td>RIAA Certified: {{album.RIAAcerts}}</td>
+        {% endif %}
+        
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

@@ -23,6 +23,7 @@ urlpatterns = [
     path('pages/', include('pages.urls')),
     path('quotes/', include ('quotes.urls')),
     path('mini_fb/', include('mini_fb.urls')),
+    path('music_db/', include('music_db.urls')),
     path('', include('quotes.urls'))
     
 ]

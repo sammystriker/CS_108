@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'pages',
     'quotes',
     'mini_fb',
+    'music_db',
 ]
 
 MIDDLEWARE = [
